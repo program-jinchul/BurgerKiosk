@@ -2,9 +2,19 @@ namespace BurgerKiosk
 {
     public partial class Form1 : Form
     {
+        // 과제 4: 실패 횟수를 저장할 변수
+        int failCount = 0;
         public Form1()
         {
             InitializeComponent();
+
+            rdoHamBurger.CheckedChanged += UpdateOrder;
+            rdoBulgogiBurger.CheckedChanged += UpdateOrder;
+            rdoChickenBurger.CheckedChanged += UpdateOrder;
+            chkPotato.CheckedChanged += UpdateOrder;
+            chkCola.CheckedChanged += UpdateOrder;
+            chkCheese.CheckedChanged += UpdateOrder;
+            chkSauce.CheckedChanged += UpdateOrder;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -14,38 +24,32 @@ namespace BurgerKiosk
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            {
-                // 초기화
-                lstOrder.Items.Clear();
-                int totalCost = 0;
-
-                // 1. 메뉴 체크
-                if (rdoHamBurger.Checked) { totalCost += 5000; lstOrder.Items.Add("햄버거 - 5,000원"); }
-                else if (rdoBulgogiBurger.Checked) { totalCost += 5500; lstOrder.Items.Add("불고기버거 - 5,500원"); }
-                else if (rdoChickenBurger.Checked) { totalCost += 6000; lstOrder.Items.Add("치킨버거 - 6,000원"); }
-
-                if (chkPotato.Checked) { totalCost += 3500; lstOrder.Items.Add("사이드: 감자튀김 - 3,500원"); }
-                if (chkCola.Checked) { totalCost += 2000; lstOrder.Items.Add("사이드: 콜라 - 2,000원"); }
-                if (chkCheese.Checked) { totalCost += 500; lstOrder.Items.Add("추가: 치즈 - 500원"); }
-                if (chkSauce.Checked) { totalCost += 500; lstOrder.Items.Add("추가: 소스 - 500원"); }
-
-               
-                // 주문 금액이 0원인지 확인
-                if (totalCost == 0)
+            {// 1. 미선택 시 실패 횟수 처리
+                if (lstOrder.Items.Count == 0)
                 {
-                    lblMessage.Text = "⚠️ 메뉴를 먼저 선택해 주세요!";
-                    lblMessage.ForeColor = System.Drawing.Color.Red; 
-                    lblMessage.Visible = true;  // 숨겨져 있던 라벨을 보이게 함
-                    return; // 여기서 함수 종료 (아래 합계 출력을 실행하지 않음)
-                }
-                else
-                {
-                    lblMessage.Visible = false; // 메뉴가 선택됐다면 경고 메시지를 다시 숨김
-                }
-                // ----------------------------------------------------------------------
+                    failCount++;
+                    lblMessage.Text = $"⚠️ 메뉴를 먼저 선택해 주세요! (실패: {failCount}/3)";
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    lblMessage.Visible = true;
 
-                // 최종 금액 출력
-                lblTotal.Text = "총 금액 : " + totalCost.ToString("N0") + "원";
+                    if (failCount >= 3)
+                    {
+                        MessageBox.Show("오류가 3회 발생하여 프로그램을 종료합니다.", "경고");
+                        Application.Exit();
+                    }
+                    return;
+                }
+
+                // 2. 주문 확인 창 (Yes/No)
+                DialogResult result = MessageBox.Show($"{lblTotal.Text}입니다. 주문하시겠습니까?",
+                                                      "주문 확인", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    MessageBox.Show("주문이 완료되었습니다!", "알림");
+                    failCount = 0; // 성공 시 카운트 초기화
+                    InitKiosk();   // 주문 완료 후 초기화
+                }
             }
         }
 
@@ -56,6 +60,7 @@ namespace BurgerKiosk
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            failCount = 0;
             InitKiosk();
         }
 
@@ -77,7 +82,28 @@ namespace BurgerKiosk
             this.ActiveControl = btnOrder;
         }
 
-        
+
+        private void UpdateOrder(object sender, EventArgs e)
+        {
+            lstOrder.Items.Clear();
+            int totalCost = 0;
+
+            // 메뉴 체크 및 리스트 즉시 추가
+            if (rdoHamBurger.Checked) { totalCost += 5000; lstOrder.Items.Add("햄버거 - 5,000원"); }
+            else if (rdoBulgogiBurger.Checked) { totalCost += 5500; lstOrder.Items.Add("불고기버거 - 5,500원"); }
+            else if (rdoChickenBurger.Checked) { totalCost += 6000; lstOrder.Items.Add("치킨버거 - 6,000원"); }
+
+            if (chkPotato.Checked) { totalCost += 3500; lstOrder.Items.Add("사이드: 감자튀김 - 3,500원"); }
+            if (chkCola.Checked) { totalCost += 2000; lstOrder.Items.Add("사이드: 콜라 - 2,000원"); }
+            if (chkCheese.Checked) { totalCost += 500; lstOrder.Items.Add("추가: 치즈 - 500원"); }
+            if (chkSauce.Checked) { totalCost += 500; lstOrder.Items.Add("추가: 소스 - 500원"); }
+
+            lblTotal.Text = "총 금액 : " + totalCost.ToString("N0") + "원";
+
+            // 메뉴가 선택되면 에러 메시지 숨기기
+            if (totalCost > 0) lblMessage.Visible = false;
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             // 엔터 키가 눌렸을 때

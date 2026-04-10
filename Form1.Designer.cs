@@ -290,7 +290,7 @@
             // 
             AutoScaleDimensions = new SizeF(14F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1705, 786);
+            ClientSize = new Size(1860, 786);
             Controls.Add(lblMessage);
             Controls.Add(btnInit);
             Controls.Add(btnOrder);
@@ -299,7 +299,7 @@
             Controls.Add(grpMenu);
             Controls.Add(label1);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Burger Kiosk v1.0";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
