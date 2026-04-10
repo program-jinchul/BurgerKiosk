@@ -44,7 +44,7 @@
             grpOption = new GroupBox();
             lstOrder = new ListBox();
             groupBox1 = new GroupBox();
-            lstTotal = new Label();
+            lblTotal = new Label();
             btnOrder = new Button();
             btnInit = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -226,7 +226,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(lstTotal);
+            groupBox1.Controls.Add(lblTotal);
             groupBox1.Controls.Add(lstOrder);
             groupBox1.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
             groupBox1.ForeColor = Color.FromArgb(255, 192, 255);
@@ -237,16 +237,16 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "주문 내역";
             // 
-            // lstTotal
+            // lblTotal
             // 
-            lstTotal.AutoSize = true;
-            lstTotal.Font = new Font("맑은 고딕", 16.125F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            lstTotal.ForeColor = Color.Cyan;
-            lstTotal.Location = new Point(23, 376);
-            lstTotal.Name = "lstTotal";
-            lstTotal.Size = new Size(180, 59);
-            lstTotal.TabIndex = 13;
-            lstTotal.Text = "총 금액:";
+            lblTotal.AutoSize = true;
+            lblTotal.Font = new Font("맑은 고딕", 16.125F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblTotal.ForeColor = Color.Cyan;
+            lblTotal.Location = new Point(23, 376);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(180, 59);
+            lblTotal.TabIndex = 13;
+            lblTotal.Text = "총 금액:";
             // 
             // btnOrder
             // 
@@ -258,6 +258,7 @@
             btnOrder.TabIndex = 14;
             btnOrder.Text = "주문하기";
             btnOrder.UseVisualStyleBackColor = false;
+            btnOrder.Click += btnOrder_Click;
             // 
             // btnInit
             // 
@@ -269,6 +270,7 @@
             btnInit.TabIndex = 15;
             btnInit.Text = "초기화";
             btnInit.UseVisualStyleBackColor = false;
+            btnInit.Click += btnInit_Click;
             // 
             // Form1
             // 
@@ -313,7 +315,7 @@
         private GroupBox grpOption;
         private ListBox lstOrder;
         private GroupBox groupBox1;
-        private Label lstTotal;
+        private Label lblTotal;
         private Button btnOrder;
         private Button btnInit;
     }
