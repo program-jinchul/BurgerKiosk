@@ -47,6 +47,7 @@
             lblTotal = new Label();
             btnOrder = new Button();
             btnInit = new Button();
+            lblMessage = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -230,7 +231,7 @@
             groupBox1.Controls.Add(lstOrder);
             groupBox1.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
             groupBox1.ForeColor = Color.FromArgb(255, 192, 255);
-            groupBox1.Location = new Point(1090, 159);
+            groupBox1.Location = new Point(1087, 99);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(534, 466);
             groupBox1.TabIndex = 13;
@@ -252,9 +253,9 @@
             // 
             btnOrder.BackColor = Color.IndianRed;
             btnOrder.Font = new Font("맑은 고딕", 14F, FontStyle.Bold);
-            btnOrder.Location = new Point(1113, 631);
+            btnOrder.Location = new Point(1087, 580);
             btnOrder.Name = "btnOrder";
-            btnOrder.Size = new Size(203, 123);
+            btnOrder.Size = new Size(245, 123);
             btnOrder.TabIndex = 14;
             btnOrder.Text = "주문하기";
             btnOrder.UseVisualStyleBackColor = false;
@@ -264,19 +265,32 @@
             // 
             btnInit.BackColor = Color.Chartreuse;
             btnInit.Font = new Font("맑은 고딕", 13.875F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            btnInit.Location = new Point(1394, 631);
+            btnInit.Location = new Point(1369, 580);
             btnInit.Name = "btnInit";
-            btnInit.Size = new Size(203, 123);
+            btnInit.Size = new Size(252, 123);
             btnInit.TabIndex = 15;
             btnInit.Text = "초기화";
             btnInit.UseVisualStyleBackColor = false;
             btnInit.Click += btnInit_Click;
+            // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblMessage.ForeColor = Color.Cyan;
+            lblMessage.Location = new Point(1110, 722);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(471, 45);
+            lblMessage.TabIndex = 16;
+            lblMessage.Text = "⚠️ 메뉴를 먼저 선택해 주세요!";
+            lblMessage.Visible = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(14F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1705, 786);
+            Controls.Add(lblMessage);
             Controls.Add(btnInit);
             Controls.Add(btnOrder);
             Controls.Add(groupBox1);
@@ -318,5 +332,6 @@
         private Label lblTotal;
         private Button btnOrder;
         private Button btnInit;
+        private Label lblMessage;
     }
 }
