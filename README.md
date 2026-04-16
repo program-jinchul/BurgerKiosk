@@ -16,9 +16,7 @@
 ## [과제 1] 버거 키오스크 기본 기능 구현
 
 ## 실행 화면
-![과제1 실행화면]
-<img width="1866" height="838" alt="스크린샷 2026-04-10 201635" src="https://github.com/user-attachments/assets/7f3f6808-6eef-44a4-a285-ce68b6740fbd" />
-
+![과제1 실행화면](img/스크린샷 2026-03-26 114910.png)
 
 ## 구현한 내용
 - **UI 구성**: Label, RadioButton(버거), CheckBox(옵션), ListBox, Button 배치
